@@ -1,0 +1,73 @@
+*{
+ margin: unset;
+ padding: unset;   
+}
+body {
+   background: #f2f2f2;
+}
+
+nav{
+    background-color:#00805a ;
+    color: #fff;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    
+}
+.container {
+    padding: 1rem;
+}
+#itemform label{
+     display: block;
+     margin-bottom: 1rem;
+}
+#itemform input {
+    height: 2rem;
+    text-align: center;
+    border: 1px solid #00805a;
+}
+#quantityinput, #priceinput{
+width: 4rem;
+}
+#additem {
+    border: unset;
+    background-color: #00805a;
+    color: #fff;
+    padding: 0.5rem;
+}
+#itemsdiv {
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+
+}
+.item{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    background: #eaeaea;
+    margin-bottom: 0.5rem;
+}
+.checkbox{
+    text-align: center;
+    padding-right: 2rem;
+}
+.iteminfo{
+    text-align: center;
+}
+.deleteButton{
+    margin: auto;
+    border: unset;
+    background: #b10000;
+    color: #fff;
+    font-size: 0.8rem;
+    width: 2.4rem;
+    height: 100%;
+}
+.deleteButton:active{
+    margin-top: 3px;
+}
+/*.Purchased {
+    background-color: #00805a;
+    color: #fff;
+}
+.Purchased p {
+    text-decoration: line-through;
+}*/
