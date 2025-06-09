@@ -7,7 +7,7 @@ body {
 }
 
 nav{
-    background-color:#00805a ;
+    background-color: blue;
     color: #fff;
     padding: 10px 20px;
     box-sizing: border-box;
@@ -23,14 +23,14 @@ nav{
 #itemform input {
     height: 2rem;
     text-align: center;
-    border: 1px solid #00805a;
+    border: 1px solid blue;
 }
 #quantityinput, #priceinput{
 width: 4rem;
 }
 #additem {
     border: unset;
-    background-color: #00805a;
+    background-color: blue;
     color: #fff;
     padding: 0.5rem;
 }
@@ -48,6 +48,7 @@ width: 4rem;
 .checkbox{
     text-align: center;
     padding-right: 2rem;
+    background-color: green;
 }
 .iteminfo{
     text-align: center;
@@ -60,9 +61,17 @@ width: 4rem;
     font-size: 0.8rem;
     width: 2.4rem;
     height: 100%;
+    padding: 0.2rem;
+    cursor: pointer;
 }
 .deleteButton:active{
     margin-top: 3px;
+}
+#totalpriceDiv {
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+
 }
 /*.Purchased {
     background-color: #00805a;

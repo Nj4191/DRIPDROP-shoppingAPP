@@ -6,7 +6,7 @@
     <title>DripDrop shop</title>
     <link rel="icon" href="/icon 2 image.png">
     <link rel="stylesheet" href="/style.css">
-    <script src="/dexie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dexie@3.2.2/dist/dexie.min.js"></script>
 </head>
 <body>
     <nav>
@@ -15,25 +15,25 @@
     <div class="container">
         <form id="ItemForm">
             <label for="Name">
-                Name
-            <input type="text" name="" id="nameInput" required>
+                Name of item
+            <input type="text"  id="nameInput" required>
             </label><br><br>
 
             <label for="">
                 Quantity
-            <input type="number" id="quantityinput" value=1>
+            <input type="number" id="quantityInput" value=1>
             </label><br><br>
 
             <label for="">
                 price
-            <input type="text" id="priceinput" value = 0.00>
+            <input type="text" id="priceInput" value = 0.00>
             </label><br><br>
             <button type="submit" id="additem">
                 Add Item
             </button>
         </form>
     </div>
-    <div id="itemsdiv">
+    <div id="itemsDiv">
      <div class="item">
         <label>
         <input type="checkbox" class="checkbox" checked>
@@ -46,6 +46,6 @@
      </div>
      <div id="totalpriceDiv">Totalprice :</div><br><br>
     </div>
-    <script src="index.js"></script>
+    <script src="/index.js" defer></script>
 </body>
 </html>
