@@ -4,7 +4,6 @@ db.version(1).stores({
   items: '++id,name,quantity,price'
 });
 
-//wait for dom to be ready
 document.addEventListener("DOMContentLoaded", async () => {
   const itemForm = document.getElementById("ItemForm");
   const itemsDiv = document.getElementById("itemsDiv");
@@ -15,10 +14,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   let items = [];
 
-  // Update the total price
+  // Update the total price with KSh and commas
   function updateTotal() {
     const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    totalPriceDiv.textContent = `Total: KSh ${total.toFixed(2)}`;
+    totalPriceDiv.textContent = `Total: KSh ${total.toLocaleString('en-KE', { minimumFractionDigits: 2 })}`;
   }
 
   // Render the items list
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       itemInfo.className = "iteminfo";
       itemInfo.innerHTML = `
         <p>${item.name}</p>
-        <p>KSh ${item.price.toFixed(2)} × ${item.quantity}</p>
+        <p>KSh ${item.price.toLocaleString('en-KE', { minimumFractionDigits: 2 })} × ${item.quantity}</p>
       `;
 
       // Delete button
@@ -51,8 +50,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       deleteButton.className = "deleteButton";
       deleteButton.textContent = "X";
       deleteButton.addEventListener("click", async () => {
-        await db.items.delete(item.id);         // Delete from IndexedDB
-        items = items.filter(i => i.id !== item.id); // Remove from local array
+        await db.items.delete(item.id);
+        items = items.filter(i => i.id !== item.id);
         renderItems();
         updateTotal();
       });
@@ -66,7 +65,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     updateTotal();
   }
 
-  // Load items from IndexedDB on start
+  // Load items from IndexedDB
   async function loadItems() {
     items = await db.items.toArray();
     renderItems();
@@ -85,12 +84,11 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
-    // Save to IndexedDB
+    // Add to DB
     const id = await db.items.add({ name, quantity, price });
 
-    // Add to local array
+    // Add to local list
     items.push({ id, name, quantity, price });
-
     renderItems();
 
     // Reset form
@@ -99,7 +97,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     priceInput.value = "0.00";
   });
 
-  // Load stored items on page load
+  // Load from DB on page load
   await loadItems();
 });
 
