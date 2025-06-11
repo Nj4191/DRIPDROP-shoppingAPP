@@ -1,58 +1,107 @@
 //console.log("js loaded");
-const db = new Dexie ('shoppingApp')
+const db = new Dexie('shoppingApp');
 db.version(1).stores({
-    items: '++id,name,quantity,price'
+  items: '++id,name,quantity,price'
 });
+
 //wait for dom to be ready
-window.addEventListener('DOMContentLoaded', () => {
-  console.log("DOM fully loaded");
+document.addEventListener("DOMContentLoaded", async () => {
+  const itemForm = document.getElementById("ItemForm");
+  const itemsDiv = document.getElementById("itemsDiv");
+  const nameInput = document.getElementById("nameinput");
+  const quantityInput = document.getElementById("quantityinput");
+  const priceInput = document.getElementById("priceinput");
+  const totalPriceDiv = document.getElementById("totalpriceDiv");
 
-  const nameInput = document.getElementById('nameinput');
-  const quantityInput = document.getElementById('quantityinput');
-  const priceInput = document.getElementById('priceinput');
-  const itemsDiv = document.getElementById('itemsDiv');
-  const totalpriceDiv = document.getElementById('totalpriceDiv');
-  const ItemForm = document.getElementById('ItemForm');
+  let items = [];
 
-  if (!nameInput || !quantityinput || !priceinput || !itemsDiv || !totalpriceDiv || !ItemForm) {
-    console.error("❌ One or more required elements not found in the DOM.");
-    return;
+  // Update the total price
+  function updateTotal() {
+    const total = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    totalPriceDiv.textContent = `Total: KSh ${total.toFixed(2)}`;
   }
 
-  ItemForm.onsubmit = async (e) => {
+  // Render the items list
+  function renderItems() {
+    const oldItems = itemsDiv.querySelectorAll(".item");
+    oldItems.forEach(item => item.remove());
+
+    items.forEach((item) => {
+      const itemEl = document.createElement("div");
+      itemEl.className = "item";
+
+      // Checkbox
+      const checkboxLabel = document.createElement("label");
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.className = "checkbox";
+      checkbox.checked = true;
+      checkboxLabel.appendChild(checkbox);
+
+      // Item info
+      const itemInfo = document.createElement("div");
+      itemInfo.className = "iteminfo";
+      itemInfo.innerHTML = `
+        <p>${item.name}</p>
+        <p>KSh ${item.price.toFixed(2)} × ${item.quantity}</p>
+      `;
+
+      // Delete button
+      const deleteButton = document.createElement("button");
+      deleteButton.className = "deleteButton";
+      deleteButton.textContent = "X";
+      deleteButton.addEventListener("click", async () => {
+        await db.items.delete(item.id);         // Delete from IndexedDB
+        items = items.filter(i => i.id !== item.id); // Remove from local array
+        renderItems();
+        updateTotal();
+      });
+
+      itemEl.appendChild(checkboxLabel);
+      itemEl.appendChild(itemInfo);
+      itemEl.appendChild(deleteButton);
+      itemsDiv.insertBefore(itemEl, totalPriceDiv);
+    });
+
+    updateTotal();
+  }
+
+  // Load items from IndexedDB on start
+  async function loadItems() {
+    items = await db.items.toArray();
+    renderItems();
+  }
+
+  // Handle form submit
+  itemForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = nameInput.value;
-    const quantity = parseInt(quantityinput.value);
-    const price = parseFloat(priceinput.value);
+    const name = nameInput.value.trim();
+    const quantity = parseInt(quantityInput.value);
+    const price = parseFloat(priceInput.value);
 
-    if (!name || quantity <= 0 || price < 0) {
+    if (!name || isNaN(quantity) || isNaN(price) || quantity <= 0 || price < 0) {
       alert("Please enter valid item details.");
       return;
     }
 
-    await db.items.add({ name, quantity, price });
-    displayItems();
-    ItemForm.reset();
-  };
-    // Display items on initial load
-  async function displayItems() {
-    const allItems = await db.items.toArray();
-    itemsDiv.innerHTML = '';
-    let total = 0;
+    // Save to IndexedDB
+    const id = await db.items.add({ name, quantity, price });
 
-    allItems.forEach(item => {
-      total += item.quantity * item.price;
-      const div = document.createElement('div');
-      div.textContent = `${item.name} - ${item.quantity} x $${item.price}`;
-      itemsDiv.appendChild(div);
-    });
+    // Add to local array
+    items.push({ id, name, quantity, price });
 
-    
-totalpriceDiv.textContent = `Total: $${total.toFixed(2)}`;
-  }
+    renderItems();
 
-  displayItems();// Initial call to display items
+    // Reset form
+    nameInput.value = "";
+    quantityInput.value = 1;
+    priceInput.value = "0.00";
+  });
+
+  // Load stored items on page load
+  await loadItems();
 });
+
 
 

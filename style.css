@@ -1,82 +1,116 @@
-*{
- margin: unset;
- padding: unset;   
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
+
 body {
-   background: #f2f2f2;
+  font-family: sans-serif;
+  background: #f2f2f2;
+  padding: 0;
+  margin: 0;
 }
 
-nav{
-    background-color: blue;
-    color: #fff;
-    padding: 10px 20px;
-    box-sizing: border-box;
-    
+nav {
+  background-color: blue;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
+
 .container {
-    padding: 1rem;
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
 }
-#itemform label{
-     display: block;
-     margin-bottom: 1rem;
+
+#ItemForm label {
+  display: block;
+  margin-bottom: 1rem;
 }
-#itemform input {
-    height: 2rem;
-    text-align: center;
-    border: 1px solid blue;
+
+#ItemForm input {
+  height: 2rem;
+  text-align: center;
+  border: 1px solid blue;
+  border-radius: 4px;
+  padding: 0 0.5rem;
+  width: 100%;
+  max-width: 300px;
 }
-#quantityinput, #priceinput{
-width: 4rem;
+
+#quantityinput,
+#priceinput {
+  width: 5rem;
 }
+
 #additem {
-    border: unset;
-    background-color: blue;
-    color: #fff;
-    padding: 0.5rem;
+  border: none;
+  background-color: blue;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
 }
-#itemsdiv {
-    margin-top: 3rem;
-    margin-bottom: 2rem;
 
+#additem:hover {
+  background-color: darkblue;
 }
-.item{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    background: #eaeaea;
-    margin-bottom: 0.5rem;
+
+#itemsDiv {
+  margin-top: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.checkbox{
-    text-align: center;
-    padding-right: 2rem;
-    background-color: green;
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  gap: 1rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-.iteminfo{
-    text-align: center;
+
+.checkbox {
+  margin-left: 0.5rem;
 }
-.deleteButton{
-    margin: auto;
-    border: unset;
-    background: #b10000;
-    color: #fff;
-    font-size: 0.8rem;
-    width: 2.4rem;
-    height: 100%;
-    padding: 0.2rem;
-    cursor: pointer;
+
+.iteminfo {
+  text-align: left;
 }
-.deleteButton:active{
-    margin-top: 3px;
+
+.iteminfo p {
+  margin: 0;
+  font-size: 0.95rem;
 }
+
+.deleteButton {
+  background-color: #b10000;
+  color: #fff;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #d00000;
+}
+
 #totalpriceDiv {
-    margin-top: 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: right;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
-/*.Purchased {
-    background-color: #00805a;
-    color: #fff;
-}
-.Purchased p {
-    text-decoration: line-through;
-}*/
