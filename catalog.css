@@ -1,0 +1,115 @@
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+body {
+  background: #f9f9f9;
+  padding: 1rem;
+  color: #333;
+}
+
+/* Navigation */
+nav {
+  background-color: blueviolet;
+  color: #fff;
+  padding: 1rem;
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Section Titles */
+section h2 {
+  margin: 1.5rem 0 1rem;
+  font-size: 1.3rem;
+}
+
+/* Catalog & Items Grid */
+.grid, #catalog {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem;
+}
+
+/* Item Card */
+.item {
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease;
+}
+.item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Item Image */
+.item img {
+  width: 100px;
+  height: auto;
+  margin-bottom: 0.5rem;
+  border-radius: 6px;
+}
+
+/* Text & Info */
+.iteminfo {
+  text-align: center;
+}
+.iteminfo p {
+  margin: 0.3rem 0;
+}
+
+/* Add Button and Quantity Input */
+.additem, .deleteButton {
+  background-color: blueviolet;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+.additem:hover, .deleteButton:hover {
+  background-color: blueviolet;
+}
+
+input[type="number"] {
+  width: 60px;
+  padding: 0.2rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+/* Shopping List */
+#itemsDiv .item {
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  gap: 1rem;
+}
+.checkbox {
+  margin-right: 1rem;
+}
+
+/* Delete Button in Shopping List */
+.deleteButton {
+  background-color: #b10000;
+}
+.deleteButton:hover {
+  background-color: #800000;
+}
+
+/* Total Price */
+#totalpriceDiv {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: right;
+}

@@ -143,4 +143,4 @@ window.addEventListener('DOMContentLoaded', async () => { // Made this async
 
     // The initial call is now correctly inside the DOMContentLoaded listener
     // and after all elements have been found and listeners set up.
-});
+}); 

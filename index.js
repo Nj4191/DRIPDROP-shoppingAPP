@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Add to DB
     const id = await db.items.add({ name, quantity, price });
 
-    // Add to local list
+    // Add to local list 
     items.push({ id, name, quantity, price });
     renderItems();
 
